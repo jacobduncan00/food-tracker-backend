@@ -5,10 +5,9 @@ var cors = require("cors");
 var dotenv = require("dotenv");
 var app = express();
 
+let PORT = process.env.PORT || 3001;
 dotenv.config();
 const Info = require("./Schema/Info");
-
-const PORT = 3001;
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
