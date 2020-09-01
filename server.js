@@ -12,16 +12,11 @@ const Info = require("./Schema/Info");
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cors());
-var devDB =
-  "mongodb+srv://jacobduncan00:Meanjdog1@@cluster0.84jwi.mongodb.net/<dbname>?retryWrites=true&w=majority";
-var mongoDB = process.env.MONGO_CONNECTION || devDB;
-mongoose.connect(
-  mongoDB,
-  { useNewUrlParser: true, useUnifiedTopology: true },
-  () => {
-    console.log("[MONGO] Connected");
-  }
-);
+var mongoDB = process.env.MONGO_CONNECTION;
+mongoose
+  .connect(mongoDB, { useNewUrlParser: true, useUnifiedTopology: true })
+  .then(connect => console.log("Connected to mongodb.."))
+  .catch(e => console.log("could not connect to mongodb", e));
 
 app.get("/test", (req, res) => {
   res.json({ hi: "World" });
