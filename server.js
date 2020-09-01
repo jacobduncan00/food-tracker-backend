@@ -29,7 +29,7 @@ app.post("/insert", (request, response) => {
   Info.find({ date: requestDate }, (err, info) => {
     if (err) {
       response.status(500).send({
-        error: "There was an error in your request",
+        error: "There was an error in your request"
       });
     }
     if (info.length === 0) {
@@ -43,17 +43,17 @@ app.post("/insert", (request, response) => {
       globalInfo.save((err, savedInfo) => {
         if (err) {
           response.status(500).send({
-            error: "Could not save information",
+            error: "Could not save information"
           });
         } else {
           response.status(200).send({
-            savedInfo,
+            savedInfo
           });
         }
       });
     } else {
       response.status(500).send({
-        error: "You have already submitted an entry today",
+        error: "You have already submitted an entry today"
       });
     }
   });
@@ -63,7 +63,7 @@ app.get("/log", (req, res) => {
   Info.find({}, (err, info) => {
     if (err) {
       res.status(500).send({
-        error: "Could not fetch entire log",
+        error: "Could not fetch entire log"
       });
     } else {
       res.status(200).send({ info });
@@ -75,7 +75,7 @@ app.get("/find-date/:id", (request, response) => {
   let specific_date = request.params.id;
   if (specific_date.length !== 8) {
     response.status(500).send({
-      error: "Date is not in correct format",
+      error: "Date is not in correct format"
     });
   }
   let month = specific_date.slice(0, 2);
@@ -85,12 +85,12 @@ app.get("/find-date/:id", (request, response) => {
   Info.find({ date: parsedDate }, (err, info) => {
     if (err) {
       response.status(500).send({
-        error: `Could not fetch log entry for ${parsedDate}`,
+        error: `Could not fetch log entry for ${parsedDate}`
       });
     }
     if (info.length == 0) {
       response.status(500).send({
-        error: `Nothing was submitted to the log on ${parsedDate}`,
+        error: `Nothing was submitted to the log on ${parsedDate}`
       });
     } else {
       response.send(info);
@@ -103,12 +103,12 @@ app.get("/find-breakfast/:id", (request, response) => {
   Info.find({ breakfast: specific_breakfast }, (err, info) => {
     if (err) {
       response.status(500).send({
-        error: `Could not fetch any entries with breakfast ${specific_breakfast}`,
+        error: `Could not fetch any entries with breakfast ${specific_breakfast}`
       });
     }
     if (info.length == 0) {
       response.status(500).send({
-        error: `No results in log for ${specific_breakfast} as a breakfast entry`,
+        error: `No results in log for ${specific_breakfast} as a breakfast entry`
       });
     } else {
       response.send(info);
@@ -121,12 +121,12 @@ app.get("/find-lunch/:id", (request, response) => {
   Info.find({ lunch: specific_lunch }, (err, info) => {
     if (err) {
       response.status(500).send({
-        error: `Could not fetch any entries with lunch ${specific_lunch}`,
+        error: `Could not fetch any entries with lunch ${specific_lunch}`
       });
     }
     if (info.length == 0) {
       response.status(500).send({
-        error: `No results in log for ${specific_lunch} as a lunch entry`,
+        error: `No results in log for ${specific_lunch} as a lunch entry`
       });
     } else {
       response.send(info);
@@ -139,12 +139,12 @@ app.get("/find-dinner/:id", (request, response) => {
   Info.find({ dinner: specific_dinner }, (err, info) => {
     if (err) {
       response.status(500).send({
-        error: `Could not fetch any entries with dinner ${specific_dinner}`,
+        error: `Could not fetch any entries with dinner ${specific_dinner}`
       });
     }
     if (info.length == 0) {
       response.status(500).send({
-        error: `No results in log for ${specific_dinner} as a dinner entry`,
+        error: `No results in log for ${specific_dinner} as a dinner entry`
       });
     } else {
       response.send(info);
@@ -157,12 +157,12 @@ app.get("/find-snacks/:id", (request, response) => {
   Info.find({ snacks: specific_snacks }, (err, info) => {
     if (err) {
       response.status(500).send({
-        error: `Could not fetch any entries with snacks ${specific_snacks}`,
+        error: `Could not fetch any entries with snacks ${specific_snacks}`
       });
     }
     if (info.length == 0) {
       response.status(500).send({
-        error: `No results in log for ${specific_snacks} as a snacks entry`,
+        error: `No results in log for ${specific_snacks} as a snacks entry`
       });
     } else {
       response.send(info);
@@ -175,12 +175,12 @@ app.get("/find-drinks/:id", (request, response) => {
   Info.find({ drinks: specific_drinks }, (err, info) => {
     if (err) {
       response.status(500).send({
-        error: `Could not fetch any entries with drinks ${specific_drinks}`,
+        error: `Could not fetch any entries with drinks ${specific_drinks}`
       });
     }
     if (info.length == 0) {
       response.status(500).send({
-        error: `No results in log for ${specific_drinks} as a drinks entry`,
+        error: `No results in log for ${specific_drinks} as a drinks entry`
       });
     } else {
       response.send(info);
@@ -210,6 +210,6 @@ app.get("/find-headache/:id", (req, res) => {
   }
 });
 
-app.listen(PORT, () => {
+app.listen(process.env.PORT || PORT, () => {
   console.log(`[Server] Port: ${PORT}`);
 });
