@@ -5,7 +5,7 @@ var cors = require("cors");
 var dotenv = require("dotenv");
 var app = express();
 
-let PORT = 3001;
+let PORT = process.env.PORT || 3001;
 dotenv.config();
 const Info = require("./Schema/Info");
 
@@ -216,6 +216,6 @@ app.get("/find-headache/:id", (req, res) => {
   }
 });
 
-app.listen(process.env.PORT || PORT, () => {
+app.listen(PORT, () => {
   console.log(`[Server] Port: ${PORT}`);
 });
