@@ -23,6 +23,10 @@ mongoose.connect(
   }
 );
 
+app.get("/test", (req, res) => {
+  res.json({ hi: "World" });
+});
+
 app.post("/insert", (request, response) => {
   let globalInfo = new Info();
   const requestDate = request.body.date;
