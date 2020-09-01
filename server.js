@@ -64,15 +64,17 @@ app.post("/insert", (request, response) => {
 });
 
 app.get("/log", (req, res) => {
-  Info.find({}, (err, info) => {
-    if (err) {
-      res.status(500).send({
-        error: "Could not fetch entire log"
-      });
-    } else {
-      res.status(200).send({ info });
-    }
-  });
+  setTimeout(() => {
+    Info.find({}, (err, info) => {
+      if (err) {
+        res.status(500).send({
+          error: "Could not fetch entire log"
+        });
+      } else {
+        res.status(200).send({ info });
+      }
+    });
+  }, 15000);
 });
 
 app.get("/find-date/:id", (request, response) => {
