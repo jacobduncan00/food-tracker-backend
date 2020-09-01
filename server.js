@@ -69,7 +69,7 @@ app.get("/log", (req, res) => {
         res.status(200).send({ info });
       }
     });
-  }, 15000);
+  }, 3000);
 });
 
 app.get("/find-date/:id", (request, response) => {
