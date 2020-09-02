@@ -23,6 +23,7 @@ app.get("/test", (req, res) => {
 });
 
 app.post("/insert", (request, response) => {
+  console.log(request.body);
   let globalInfo = new Info();
   const requestDate = request.body.date;
   setTimeout(() => { 
