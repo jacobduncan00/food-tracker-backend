@@ -25,6 +25,7 @@ app.get("/test", (req, res) => {
 app.post("/insert", (request, response) => {
   let globalInfo = new Info();
   const requestDate = request.body.date;
+  setTimeout(() => { 
   Info.find({ date: requestDate }, (err, info) => {
     if (err) {
       response.status(500).send({
@@ -55,7 +56,8 @@ app.post("/insert", (request, response) => {
         error: "You have already submitted an entry today"
       });
     }
-  });
+   });
+  }, 3000);
 });
 
 app.get("/log", (req, res) => {
