@@ -30,6 +30,7 @@ app.post("/insert", (request, response) => {
   setTimeout(() => { 
     Info.find({ date: requestDate }, (err, info) => {
       if (err) {
+        console.log("error here");
         response.status(500).send({
           error: "There was an error in your request"
         });
@@ -44,6 +45,7 @@ app.post("/insert", (request, response) => {
         globalInfo.headache = request.body.headache;
         globalInfo.save((err, savedInfo) => {
           if (err) {
+            console.log("error here 1");
             response.status(500).send({
               error: "Could not save information"
             });
@@ -54,6 +56,7 @@ app.post("/insert", (request, response) => {
           }
         });
       } else {
+        console.log("error here 2");
         response.status(500).send({
           error: "You have already submitted an entry today"
         });
