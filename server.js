@@ -26,38 +26,39 @@ app.post("/insert", (request, response) => {
   console.log(request.body);
   let globalInfo = new Info();
   const requestDate = request.body.date;
+  console.log(requestDate);
   setTimeout(() => { 
-  Info.find({ date: requestDate }, (err, info) => {
-    if (err) {
-      response.status(500).send({
-        error: "There was an error in your request"
-      });
-    }
-    if (info.length === 0) {
-      globalInfo.date = request.body.date;
-      globalInfo.breakfast = request.body.breakfast;
-      globalInfo.lunch = request.body.lunch;
-      globalInfo.dinner = request.body.dinner;
-      globalInfo.snacks = request.body.snacks;
-      globalInfo.drinks = request.body.drinks;
-      globalInfo.headache = request.body.headache;
-      globalInfo.save((err, savedInfo) => {
-        if (err) {
-          response.status(500).send({
-            error: "Could not save information"
-          });
-        } else {
-          response.status(200).send({
-            savedInfo
-          });
-        }
-      });
-    } else {
-      response.status(500).send({
-        error: "You have already submitted an entry today"
-      });
-    }
-   });
+    Info.find({ date: requestDate }, (err, info) => {
+      if (err) {
+        response.status(500).send({
+          error: "There was an error in your request"
+        });
+      }
+      if (info.length === 0) {
+        globalInfo.date = request.body.date;
+        globalInfo.breakfast = request.body.breakfast;
+        globalInfo.lunch = request.body.lunch;
+        globalInfo.dinner = request.body.dinner;
+        globalInfo.snacks = request.body.snacks;
+        globalInfo.drinks = request.body.drinks;
+        globalInfo.headache = request.body.headache;
+        globalInfo.save((err, savedInfo) => {
+          if (err) {
+            response.status(500).send({
+              error: "Could not save information"
+            });
+          } else {
+            response.status(200).send({
+              savedInfo
+            });
+          }
+        });
+      } else {
+        response.status(500).send({
+          error: "You have already submitted an entry today"
+        });
+      }
+     });
   }, 3000);
 });
 
