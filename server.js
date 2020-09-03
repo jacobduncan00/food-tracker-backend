@@ -62,7 +62,6 @@ app.post("/insert", (request, response) => {
 });
 
 app.get("/log", (req, res) => {
-  setTimeout(() => {
     Info.find({}, (err, info) => {
       if (err) {
         res.status(500).send({
@@ -72,7 +71,6 @@ app.get("/log", (req, res) => {
         res.status(200).send({ info });
       }
     });
-  }, 3000);
 });
 
 app.get("/find-date/:id", (request, response) => {
