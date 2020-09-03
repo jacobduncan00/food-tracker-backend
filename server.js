@@ -43,17 +43,27 @@ app.post("/insert", (request, response) => {
         globalInfo.snacks = request.body.snacks;
         globalInfo.drinks = request.body.drinks;
         globalInfo.headache = request.body.headache;
-        globalInfo.save((err, savedInfo) => {
+        Info.collection("<dbname>").insertOne(globalInfo, (err, doc) => {
           if (err) {
-            console.log("error here 1");
+            console.log("error here 1", err);
             response.status(500).send({
               error: "Could not save information"
             });
-          } else {
-            response.status(200).send({
-              savedInfo
-            });
           }
+          else {
+            response.status(200).send(doc);
+          }
+        //Info.save((err, savedInfo) => {
+          //if (err) {
+            //console.log("error here 1", err);
+            //response.status(500).send({
+              //error: "Could not save information"
+            //});
+          //} else {
+            //response.status(200).send({
+              //savedInfo
+            //});
+          //}
         });
       } else {
         console.log("error here 2");
