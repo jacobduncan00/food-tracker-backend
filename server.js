@@ -23,11 +23,8 @@ app.get("/test", (req, res) => {
 });
 
 app.post("/insert", (request, response) => {
-  console.log(request.body);
   let globalInfo = new Info();
   const requestDate = request.body.date;
-  console.log(requestDate);
-  setTimeout(() => { 
     Info.find({ date: requestDate }, (err, info) => {
       if (err) {
         console.log("error here");
@@ -43,27 +40,17 @@ app.post("/insert", (request, response) => {
         globalInfo.snacks = request.body.snacks;
         globalInfo.drinks = request.body.drinks;
         globalInfo.headache = request.body.headache;
-        Info.collection("<dbname>").insertOne(globalInfo, (err, doc) => {
+        globalInfo.save((err, savedInfo) => {
           if (err) {
             console.log("error here 1", err);
             response.status(500).send({
               error: "Could not save information"
             });
+          } else {
+            response.status(200).send({
+              savedInfo
+            });
           }
-          else {
-            response.status(200).send(doc);
-          }
-        //Info.save((err, savedInfo) => {
-          //if (err) {
-            //console.log("error here 1", err);
-            //response.status(500).send({
-              //error: "Could not save information"
-            //});
-          //} else {
-            //response.status(200).send({
-              //savedInfo
-            //});
-          //}
         });
       } else {
         console.log("error here 2");
@@ -72,7 +59,6 @@ app.post("/insert", (request, response) => {
         });
       }
      });
-  }, 3000);
 });
 
 app.get("/log", (req, res) => {
